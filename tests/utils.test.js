@@ -62,7 +62,6 @@ it("should return circleArea", function() {
 // of "Pending Tests" in Chai. Someone should write these
 // tests eventually.
 // ========================================================
-
 beforeEach((done) => {
   utils.clearCart()
   done()
@@ -76,13 +75,35 @@ it("Should create a new (object) Item with name and price", function() {
   expect(item).to.have.property("quantity", 1)
 })
 
-it("Should return an array containing all items in cart")
+it("Should return an array containing all items in cart", function() {
+  const item = utils.createItem("apple", 0.99)
+  utils.addItemToCart(item)
+  const items = utils.getShoppingCart()
+  expect(items[0]).to.have.property("name", "apple")
+})
 
-it("Should add a new item to the shopping cart")
+it("Should add a new item to the shopping cart", function(){
+  const item = utils.createItem("apple", 0.99)
+  utils.addItemToCart(item)
+  expect(item).to.be.a("object")
+  expect(item).to.have.property("name", "apple")
+  expect(item).to.have.property("quantity", 1)
+})
 
-it("Should return the number of items in the cart")
+it("Should return the number of items in the cart", function(){
+  const item = utils.createItem("apple", 0.99)
+  utils.addItemToCart(item)
+  const items = utils.getNumItemsInCart()
+  expect(utils.getNumItemsInCart()).to.equal(1)
+})
 
-it("Should remove items from cart")
+it("Should remove items from cart", function(){
+  const item = utils.createItem("apple", 0.99)
+  utils.addItemToCart(item)
+  expect(utils.getNumItemsInCart()).to.equal(1)
+  utils.removeItemFromCart(item)
+  expect(utils.getNumItemsInCart()).to.equal(0)
+})
 
 // ========================================================
 // Stretch Challenges
